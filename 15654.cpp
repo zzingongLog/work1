@@ -1,17 +1,17 @@
 #include <iostream>
+#include <algorithm>
 using namespace std;
-bool c[10]; int a[10];
+bool c[10]; int a[10]; int num[10];
 void go (int index, int n, int m) {
     if (index == m) {
-        //수열 출력
         for (int i = 0; i < m; i++) {
-            cout << a[i];
+            cout << num[a[i]];
             if (i != m - 1) cout << ' ';
         }
         cout << '\n';
         return;
-    } 
-    for (int i = 1; i <= n; i++) {
+    }
+    for (int i = 0; i < n; i++) {
         if (c[i]) continue;
         c[i] = true; a[index] = i;
         go (index + 1, n, m);
@@ -21,6 +21,10 @@ void go (int index, int n, int m) {
 int main () {
     int n, m;
     cin >> n >> m;
+    for (int i = 0; i < n; i++) {
+        cin >> num[i];
+    }
+    sort(num, num + n);
     go (0, n, m);
     return 0;
 }
