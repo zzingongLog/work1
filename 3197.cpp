@@ -38,7 +38,7 @@ int main () {
             int x = water.front().first;
             int y = water.front().second;
             water.pop();
-            a[x][y] = '.';
+            a[x][y] = '.'; //얼음을 물로 바꿔야함
             for (int k = 0; k < 4; k++) {
                 int nx = x + dx[k];
                 int ny = y + dy[k];

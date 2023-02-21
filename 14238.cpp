@@ -38,7 +38,7 @@ string back(int a, int b, int c, int p1, int p2) {
     }
     if (c > 0 && p1 != 2 && p2 != 2) {
         if (go(a, b, c-1, 2, p1) == 1) {
-            return "C" + back(a, b, c-1, 2, p1);
+            return "C" + back(a, b, c - 1, 2, p1);
         }
     }
     return "";

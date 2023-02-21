@@ -73,7 +73,7 @@ int main () {
         for (int j = 0; j < m; j++) {
             cin >> a[i][j];
             if (a[i][j] >= 1 && a[i][j] <= 5) {
-                cctv.emplace_back(a[i][j], i, j);
+                cctv.emplace_back(a[i][j], i, j); //인자만 던져도 객체로 자동으로 만들어줌
                 dirs.push_back(0);
             }
         }

@@ -9,9 +9,9 @@ pair<int,int> from[500][500];//어디에서 왔는지 기록
 int dist[500][500];//그정점에 몇번만에왔냐를 기록
 //하나의 타일이 최대 6가지까지 움직일 수 있기 때문에 6방향
 //홀짝을 구분
-int dx0[6] = {-1, -1, 0, 0, 1, 1}; //짝
+int dx0[6] = {-1, -1, 0, 0, 1, 1}; //홀
 int dy0[6] = {-1, 0, -1, 1, -1, 0};
-int dx1[6] = {-1, -1, 0, 0, 1, 1};//홀
+int dx1[6] = {-1, -1, 0, 0, 1, 1};//짝
 int dy1[6] = {0, 1, -1, 1, 0, 1};
 bool ok(int x, int y) { //x행, y열 번째 타일이 존재하는지 여부
     if (x < 0 || x >= n) return false;
@@ -21,6 +21,7 @@ bool ok(int x, int y) { //x행, y열 번째 타일이 존재하는지 여부
         return y >= 0 && y < n-1;
     }
 }
+//다음 도미노로 건너갈 수 있는지 여부를 체크
 //x1, y1에서 x2, y2로 이동할 수 있냐?
 bool go(int x1, int y1, int x2, int y2) { //도미노가 뒤틀려 있어서 복잡함.차근차근생각하기
     if (x1 == x2) { //행이 같은 경우
@@ -30,7 +31,7 @@ bool go(int x1, int y1, int x2, int y2) { //도미노가 뒤틀려 있어서 복
             return a[x1][y1][0] == a[x2][y2][1];
         }
     } else { //행이 다른 경우
-        if (x1%2 == 0) { //행이 짝수
+        if (x1 % 2 == 0) { //행이 짝수
             if (y1 == y2) {
                 return a[x1][y1][1] == a[x2][y2][0];
             } else {
@@ -45,42 +46,47 @@ bool go(int x1, int y1, int x2, int y2) { //도미노가 뒤틀려 있어서 복
         }
     }
 }
+//x, y는 0부터 시작하고 타일의 번호는 0,0 도미노는 1이 되어야 한다. 
+//행렬 번호 매기는 기본은 0,0부터 시작하는 좌표의 (x,y) 일때 
+// (0,0)을 1부터 매기고 싶다면 (x * 열의 수) + y + 1 을 하면 된다.
+//여기서는 도미노 배열이 특이하기 때문에 0, 1행을 따로 처리하고, 2행부터 계산되도록함
+//짝수행(0부터 시작하므로 x % 2 == 1)일 때는 도미노가 한칸 모자르며, 바로 윗줄은 n개의 도미노가 있다는 것이 확실하다.
 int num(int x, int y) { //타일의 번호 구하기 (*행렬 공부 필요, row-major order)
-    int ans = x/2*(n*2-1);
-    if (x%2 == 1) {
+    int ans = x / 2 * (n * 2 - 1);
+    if (x % 2 == 1) {
         ans += n;
     }
-    ans += y+1;
+    ans += y + 1;
     return ans;
 }
 int main() {
     cin >> n;
-    for (int i=0; i<n; i++) {
-        for (int j=0; j<n-1; j++) {
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n - 1; j++) {
             cin >> a[i][j][0];
             cin >> a[i][j][1];
         }
-        if (i%2 == 0) { //짝수이면 마지막 열이 하나 더 있으므로 하나 더 받음
-            cin >> a[i][n-1][0];
-            cin >> a[i][n-1][1];
+        if (i % 2 == 0) { //짝수이면 마지막 열이 하나 더 있으므로 하나 더 받음
+            cin >> a[i][n - 1][0];
+            cin >> a[i][n - 1][1];
         }
     }
     queue<pair<int,int>> q; //bfs
     check[0][0] = true; //출발점 시작
     dist[0][0] = 1;
-    q.push(make_pair(0,0));
+    q.push(make_pair(0, 0));
     while (!q.empty()) {
         int x = q.front().first;
         int y = q.front().second;
         q.pop();
-        for (int k=0; k<6; k++) { //6가지로 이동하는거 또 홀짝에 따라 이동방법까지 다름
+        for (int k = 0; k < 6; k++) { //6가지로 이동하는거 또 홀짝에 따라 이동방법까지 다름
             int nx, ny;
-            if (x%2 == 0) { //짝수줄
-                nx = x+dx0[k];
-                ny = y+dy0[k];
+            if (x % 2 == 0) { //짝수줄
+                nx = x + dx0[k];
+                ny = y + dy0[k];
             } else { //홀수줄
-                nx = x+dx1[k];
-                ny = y+dy1[k];
+                nx = x + dx1[k];
+                ny = y + dy1[k];
             }
             if (ok(nx, ny) == false) continue;
             if (go(x, y, nx, ny) == false) continue;
@@ -91,14 +97,14 @@ int main() {
             q.push(make_pair(nx, ny));
         }
     }
-    int x = n-1;
-    int y = n-1;
+    int x = n - 1;
+    int y = n - 1;
     //마지막 타일 방문이 안되었다면 최대한 마지막타일과 가까운 타일에 방문한 곳을 구하라.
     while (check[x][y] == false) {
         y -= 1;
         if (y < 0) {
             x -= 1;
-            y = n-1;
+            y = n - 1;
             if (x % 2 == 1) {
                 y -= 1;
             }
@@ -106,8 +112,8 @@ int main() {
     }
     cout << dist[x][y] << '\n';
     stack<pair<int,int>> s;
-    while (!(x==0 && y==0)) {
-        s.push(make_pair(x,y));
+    while (!(x == 0 && y == 0)) {
+        s.push(make_pair(x, y));
         auto p = from[x][y];
         x = p.first;
         y = p.second;
