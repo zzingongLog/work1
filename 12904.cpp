@@ -7,9 +7,9 @@ int main () {
     cin >> s >> t;
     //반대로 t -> s로 가보기
     while (t.length() > s.length()) {
-        if (t.back() == 'A') {
+        if (t.back() == 'A') { //끝자리가 A면 그냥 A를 뺀다.
             t.pop_back();
-        } else {
+        } else { //B면 B를 빼고 뒤집는다
             t.pop_back();
             reverse(t.begin(), t.end());
         }
