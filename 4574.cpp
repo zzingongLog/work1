@@ -9,7 +9,7 @@ bool c3[10][10]; //c[square][i] = 작은 사각형에 숫자 i가 있으면 true
 bool domino[10][10];//domino[i][j] = 도미노숫자 i, j
 int n = 9;
 //도미노를 가로, 세로로 놓을 수 있는 2가지 경우가 있다.
-//dx[0], dy[0]:아래로 놓는거, dx[1], dy[1]:옆으로 놓는거
+//dx[0], dy[1]:가로, dx[1], dy[0]:세로
 int dx[] = {0, 1};
 int dy[] = {1, 0};
 pair<int,int> convert(string s) {
@@ -60,8 +60,8 @@ bool go(int z) {
                         check(x, y, i, true);
                         check(nx, ny, j, true);
                         domino[i][j] = domino[j][i] = true;
-                        a[x][y] = i;
-                        a[nx][ny] = j;
+                        a[x][y] = i; //실제 숫자 놓기
+                        a[nx][ny] = j; //실제 숫자 놓기
                         if (go(z + 1)) {
                             return true;
                         }

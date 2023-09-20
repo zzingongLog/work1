@@ -41,8 +41,8 @@ int main () {
             int ny = y + dy[i];
             if (nx >= 0 && nx < r && ny >= 0 && ny < c) {
                 if (water[nx][ny] != -1) continue; 
-                if(a[nx][ny] == 'X') continue;
-                if (a[nx][ny] == 'D') continue;
+                if(a[nx][ny] == 'X') continue;//돌
+                if (a[nx][ny] == 'D') continue;//비버굴
                 water[nx][ny] = water[x][y] + 1;
                 q.push(make_pair(nx, ny));
             }

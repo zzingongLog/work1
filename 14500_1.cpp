@@ -6,18 +6,19 @@ int n, m;
 int dx[] = {0, 0, 1, -1};
 int dy[] = {1, -1, 0, 0};
 int ans = 0;
+//브루트포스
 void go (int x, int y, int sum, int cnt) {
     if (cnt == 4) {
         if (ans < sum) ans = sum;
         return;
     }
     if (x < 0 || x >= n || y < 0 || y >= m) return;
-    if (c[x][y]) return;
+    if (c[x][y]) return; //이미 방문했으면 종료
     c[x][y] = true;
     for (int k = 0; k < 4; k++) {
         go(x + dx[k], y + dy[k], sum + a[x][y], cnt + 1);
     }
-    c[x][y]= false;
+    c[x][y]= false; //원복
 }
 int main () {
     cin >> n >> m;

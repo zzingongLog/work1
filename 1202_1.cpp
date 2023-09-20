@@ -22,13 +22,13 @@ int main () {
     });
     priority_queue<int> q; //우선순위큐, 최대 힙. 가장 큰것이 우선순위가 가장 높다(=먼저나온다)
     long long ans = 0;
-    for (auto &p :a) {
+    for (auto &p :a) {//시간복잡도 (n + k)logN
         if (p.w == 0) { //보석이면 해당 보석의 가치값을 우선순위큐에 계속 넣어야함
-            q.push(p.v);
+            q.push(p.v); //logN
         } else { //가방이라면 앞전의 보석들중 가장 큰 가치를 갖는 것을 넣어야한다.
             if (!q.empty()) {
                 ans += (long long) q.top();//우선순위큐 자료구조에 의해 top을 하면 가장 큰 가치값이 나옴
-                q.pop();
+                q.pop(); //logN
             }
         }
     }

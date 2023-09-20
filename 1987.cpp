@@ -29,7 +29,7 @@ int main () {
     for (int i = 0; i < r; i++) {
         cin >> board[i];
     }
-    vector<bool> check(26);
+    vector<bool> check(26);//어떤 알파벳을 방문했는지 체크하려는 배열
     check[board[0][0] - 'A'] = true;
     cout << go(board, check, 0, 0) << '\n';
     return 0;

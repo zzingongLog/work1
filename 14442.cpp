@@ -5,12 +5,12 @@
 #include <cstdio>
 using namespace std;
 int a[1000][1000];
-int d[1000][1000][11];
+int d[1000][1000][11]; //벽을 부실 수 있는 횟수를 11로 만들어줌
 int dx[] = {0, 0, 1, -1};
 int dy[] = {1, -1, 0, 0};
 int main () {
     int n, m, l;
-    cin >> n >> m >> l;
+    cin >> n >> m >> l; //벽을 l번까지 부실 수 있음
     for (int i = 0; i < n; i++) {
         for (int j = 0; j < m; j++) {
             scanf("%1d", &a[i][j]);

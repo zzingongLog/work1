@@ -8,7 +8,7 @@ const long long limit = 1000000000LL;
 int main () {
     long long s, t;
     cin >> s >> t;
-    set<long long> check;
+    set<long long> check;//10억이라는 수를 인덱스로하는 배열을 만들수는 없기에 set으로 처리함
     queue<pair<long long, string>> q;
     q.push(make_pair(s, ""));
     check.insert(s);

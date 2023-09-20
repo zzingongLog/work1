@@ -9,7 +9,7 @@ int main () {
     vector<int> sign;
     bool minus = false;
     int cur = 0;
-    sign.push_back(1);
+    sign.push_back(1);//맨 처음 부호 +이므로 1을 넣기
     for (int i = 0; i < s.size(); i++) {
         if (s[i] == '+' || s[i] == '-') {
             if (s[i] == '+') {
@@ -19,7 +19,7 @@ int main () {
             }
             num.push_back(cur);
             cur = 0;
-        } else {
+        } else { //연속하는 숫자를 만들어주기 위함
             cur = cur * 10 + (s[i] - '0');
         }
     }

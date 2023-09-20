@@ -1,3 +1,4 @@
+//BFS
 #include <iostream>
 #include <queue>
 using namespace std;
@@ -6,12 +7,12 @@ int dy[] = {-1, 1, 0, 0};
 int n, m;
 int a[10][10];
 int b[10][10];
-int bfs() {
+int bfs() { //바이러스가 퍼지고 안퍼진칸의 개수를 리턴함
     queue<pair<int, int>> q;
     for (int i = 0; i < n; i++) {
         for (int j = 0; j < m; j++) {
             b[i][j] = a[i][j];
-            if (a[i][j] == 2) {
+            if (a[i][j] == 2) { //바이러스의 위치는 전부 큐의 시작점에 넣기
                 q.push(make_pair(i, j));
             }
         }
@@ -25,7 +26,7 @@ int bfs() {
             int ny = y + dy[k];
             if (nx >= 0 && nx < n && ny >= 0 && ny < m) {
                 if (b[nx][ny] == 0) {
-                    b[nx][ny] = 2;
+                    b[nx][ny] = 2; //바이러스 퍼트리기
                     q.push(make_pair(nx, ny));
                 }
             }
@@ -59,7 +60,7 @@ int main () {
                             if (x1 == x2 && y1 == y2) continue;
                             if (x1 == x3 && y1 == y3) continue;
                             if (x2 == x3 && y2 == y3) continue;
-                            a[x1][y1] = 1;
+                            a[x1][y1] = 1;//벽 놓아주기
                             a[x2][y2] = 1;
                             a[x3][y3] = 1;
                             int cur = bfs();

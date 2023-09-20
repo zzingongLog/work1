@@ -20,7 +20,7 @@ int main () {
         scanf("%d %d", &a[i].begin, &a[i].end);
     }
     sort(a.begin(), a.end(), cmp);
-    int now = 0; // 끝나는 시간 처음은 0시부터 시작하므로 0으로 대입
+    int now = 0; // 끝나는 시간. 처음은 0시부터 시작하므로 0으로 대입
     int ans = 0; //가능한 회의의 최대 개수
     for (int i = 0; i < n; i++) {
         if (now <= a[i].begin) { //끝나는 시간보다 회의의 시작하는 시간이 같거나 크면 회의가 가능

@@ -66,7 +66,7 @@ int main () {
                     int y = j + dy[k];
                     if (0 <= x && x < n && 0 <= y && y < m) {
                         if (a[x][y] == 0) {
-                            near.insert(group[x][y]);
+                            near.insert(group[x][y]); //인접해있는 그룹번호를 set에 넣음
                         }
                     }
                 }

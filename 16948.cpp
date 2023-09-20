@@ -3,11 +3,12 @@
 #include <tuple>
 #include <cstring>
 using namespace std;
+//데스나이트 이동방식
 int dx[] = {-2, -2, 0, 0, 2, 2};
 int dy[] = {-1, 1, -2, 2, -1, 1};
 int dist[200][200];
 int main () {
-    int n; //체스판크기
+    int n; //체스판크기 제한 200
     cin >> n;
     int sx, sy, ex, ey;
     cin >> sx >> sy >> ex >> ey;

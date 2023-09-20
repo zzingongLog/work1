@@ -6,13 +6,13 @@ bool check_dig[40];
 bool check_dig2[40];
 int n;
 bool check(int row, int col) {
-    if (check_col[col]) {
+    if (check_col[col]) { //열 검사
         return false;
     }
-    if (check_dig[row + col]) {
+    if (check_dig[row + col]) { //왼쪽 위 대각선 검사
         return false;
     }
-    if (check_dig2[row - col + n]) {
+    if (check_dig2[row - col + n]) { // 오른쪽 위 대각선 검사
         return false;
     }
     return true;
@@ -23,12 +23,13 @@ int calc(int row) {
     }
     int cnt = 0;
     for (int col = 0; col < n; col++) {
-        if (check(row, col)) {
+        if (check(row, col)) { //이 자리에 퀸이 올 수 있는가? 를 체크
             check_col[col] = true;
             check_dig[row + col] = true;
             check_dig2[row - col + n] = true;
-            a[row][col] = true;
-            cnt += calc(row + 1);
+            a[row][col] = true; //실제 퀸을 놓음
+            cnt += calc(row + 1); //다음 행으로 가기 
+            //원래대로 바꿔주는 부분
             check_col[col] = false;
             check_dig[row + col] = false;
             check_dig2[row - col + n] = false;

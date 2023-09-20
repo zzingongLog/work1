@@ -60,9 +60,9 @@ int main () {
             }
         }
     }
-    int ans = 0; //상어가 물고기를 잡아먹을 수 있는 초 = 최소이동거리 (1칸 움직일때마다 1초걸림)
-    int size = 2;
-    int exp = 0;
+    int ans = 0; //정답. 상어가 물고기를 잡아먹는데 걸린 시간 = 최소이동거리 (1칸 움직일때마다 1초걸림)
+    int size = 2; 
+    int exp = 0; //경험치
     while (true) { //상어는 매번 현재위치기준 가장 가까운 물고기를 탐색해야함
         int nx, ny, dist; //상어 다음 좌표, 움직일 수 있는 최소이동칸수
         tie(dist, nx, ny) = bfs(a, x, y, size);

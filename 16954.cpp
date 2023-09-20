@@ -14,7 +14,7 @@ int main () {
         cin >> a[i];
     }
     queue<tuple<int, int, int>> q;
-    check[7][0][0] = true; //시작점
+    check[7][0][0] = true; //제일 왼쪽 아래가 시작점
     q.push(make_tuple(7, 0, 0));
     bool ans = false;
     while (!q.empty()) {

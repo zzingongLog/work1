@@ -29,12 +29,12 @@ int check(vector<vector<int>> &a, vector<int> &dirs) {
             }
         }
         while (true) {
-            ok = false;
-            if (dir == 0) {
+            ok = false; //합쳐졌는거나 이동했는지 여부. 더이상 변화가 없을 경우 while문 탈출
+            if (dir == 0) { //아래
                 for (int i = n - 2; i >= 0; i--) {
                     for (int j = 0; j < n; j++) {
-                        if (d[i][j].first == 0) continue;
-                        if (d[i + 1][j].first == 0) {
+                        if (d[i][j].first == 0) continue; //수가 없음
+                        if (d[i + 1][j].first == 0) {//아래쪽에 있는 수가 없음
                             d[i + 1][j].first = d[i][j].first;
                             d[i + 1][j].second = d[i][j].second;
                             d[i][j].first = 0;
@@ -49,7 +49,7 @@ int check(vector<vector<int>> &a, vector<int> &dirs) {
                         }
                     }
                 }
-            } else if (dir == 1) {
+            } else if (dir == 1) { //위로 이동
                 for (int i = 1; i < n; i++) {
                     for (int j = 0; j < n; j++) {
                         if (d[i][j].first == 0) continue;
